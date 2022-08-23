@@ -77,7 +77,12 @@ public class SpecialRuleController {
 	}
 	
 	
-	
+	//Assign to weapon
+	@PutMapping("/weaponrules/{r_id}/{w_id}")
+	public ResponseEntity<SpecialRule> assignSpecialRuleToWeapon(@PathVariable("r_id") long r_id, @PathVariable("w_id") long w_id){
+		specialRuleService.assignRuleToWeapon( w_id, r_id);
+		return new ResponseEntity<SpecialRule>( HttpStatus.OK);
+	}
 	
 	@GetMapping("/hello2")
 	public String sayHi2() {

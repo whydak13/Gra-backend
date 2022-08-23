@@ -1,10 +1,17 @@
 package com.gra.builder.bean;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -35,6 +42,18 @@ public class Weapon {
 
 	@Column(name="description" )
 	private String description;
+	
+	@ManyToMany(mappedBy = "assignedWeapons")
+	//private Set<SpecialRule> specialRules = new HashSet<>();
+	private List<SpecialRule> specialRules = new ArrayList<>(); 
+	
+	public void addSpecialRule(SpecialRule specialRule)
+	
+	{
+		specialRules.add(specialRule);
+	}
+	
+	
 	
 
 	public float getCost() {

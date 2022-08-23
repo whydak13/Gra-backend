@@ -19,5 +19,6 @@ public interface SpecialRuleService {
 	SpecialRule getSpecialRuleByID(long id);
 	SpecialRule uptadSpecialRule(SpecialRule specialRule, long id);
 	void deleteSpecialRule(long id);
+	void assignRuleToWeapon(long r_id, long w_id);
 }
 

@@ -9,17 +9,23 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gra.builder.bean.SpecialRule;
+import com.gra.builder.bean.Weapon;
 import com.gra.builder.exceptions.ResourceNotFoundException;
 import com.gra.builder.repository.SpecialRuleRepository;
+import com.gra.builder.repository.WeaponRepository;
 import com.gra.builder.service.SpecialRuleService;
+import com.gra.builder.service.WeaponService;
 @Service
 public class SpecialRuleServiceImpl implements SpecialRuleService{
 
 	private SpecialRuleRepository specialRuleRepository;
+
 
 	public SpecialRuleServiceImpl(SpecialRuleRepository specialRuleRepository) {
 		super();
@@ -85,6 +91,19 @@ public class SpecialRuleServiceImpl implements SpecialRuleService{
 		
 		specialRuleRepository.deleteById(id);
 		
+	}
+
+
+
+	@Override
+	@Transactional 
+	public void assignRuleToWeapon(long r_id, long w_id) {
+		
+		SpecialRule SpecialRule = specialRuleRepository.findById(r_id).orElseThrow(()-> new ResourceNotFoundException("SpecialRule", "Id", r_id));	
+		
+		Weapon weapon = new Weapon(); 
+		weapon.setId(w_id);
+		//SpecialRule.assignWeapon(weapon);
 	}
 
 	
